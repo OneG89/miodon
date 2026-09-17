@@ -1,0 +1,42 @@
+{
+  "name": "miodon",
+  "version": "0.1.0",
+  "description": "苗懂 Miodon — 面向 0–6 岁儿童家庭的疫苗数据查询、智能接种日历与接种决策参考（纯静态、本地存储）",
+  "license": "MIT",
+  "author": "OneG89 <531787939@qq.com> (https://github.com/OneG89)",
+  "homepage": "https://github.com/OneG89/miodon#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OneG89/miodon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OneG89/miodon/issues"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "date-fns": "^4.4.0",
+    "lucide-react": "^1.38.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.1.0",
+    "autoprefixer": "^10.5.4",
+    "oxlint": "^1.79.0",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.2"
+  }
+}
