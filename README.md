@@ -28,6 +28,39 @@ npm run preview  # 预览构建产物
 
 技术栈：Vite + React 19 + TypeScript + Tailwind CSS + react-router-dom（HashRouter）+ date-fns + lucide-react。构建产物为纯静态文件，可部署到任意静态托管 / OSS + CDN。
 
+## 部署
+
+无后端、无环境变量、无网络请求，构建产物是纯静态文件，托管 `dist/` 目录即可。路由使用 HashRouter（URL 带 `#`），因此 **任何静态服务器都不需要配置 SPA 重写规则**。
+
+```bash
+npm ci
+npm run build     # 产物输出到 dist/
+```
+
+然后任选一种方式：
+
+- **Vercel / Netlify / Cloudflare Pages**：导入仓库，Build Command 填 `npm run build`，输出目录填 `dist`，其余默认即可。
+- **GitHub Pages**：项目页地址带子路径（`https://<用户名>.github.io/miodon/`），需先在 `vite.config.ts` 中设置 `base: '/miodon/'` 再构建，然后发布 `dist/`（可用 Actions 的 `actions/upload-pages-artifact`，或直接放到 `gh-pages` 分支）。绑定自定义域名或使用 `<用户名>.github.io` 主仓库时则无需修改 `base`。
+- **Nginx 自托管**：把 `dist/` 内容放到站点根目录即可，示例：
+
+  ```nginx
+  server {
+      listen 80;
+      root /var/www/miodon;   # 指向 dist 目录内容
+      index index.html;
+      # HashRouter 路由，无需 try_files 回退
+  }
+  ```
+
+- **对象存储 + CDN（OSS / COS / S3）**：开启静态网站托管，将 `dist/` 内全部文件上传，默认首页设为 `index.html`。
+
+## 使用
+
+1. 打开网站后输入宝宝出生日期（支持多个宝宝档案），即自动生成 0–6 岁接种日历；
+2. 在「方案规划」中选择免费/精选/省心预设或自行勾选自费苗，查看排针与费用区间；
+3. 接种后可在「接种记录」登记剂次与反应，并导出 `.ics` 日历到手机；
+4. 所有档案与记录只保存在当前浏览器的 localStorage 中，清除浏览器数据会丢失，建议定期用「JSON 导出」做备份，换设备时用「JSON 导入」恢复。
+
 ## 知识库数据来源
 
 - 《国家免疫规划疫苗儿童免疫程序及说明（2026 年版）》（国家疾控局、国家卫生健康委，国疾控卫免发〔2026〕16 号）
